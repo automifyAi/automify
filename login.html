@@ -1,15 +1,55 @@
 <!DOCTYPE html>
 <html>
+<head>
+  <title>Login – Automify</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #f4f6f8;
+      padding-top: 100px;
+    }
+    .box {
+      background: white;
+      width: 300px;
+      margin: auto;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 15px;
+      background: black;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+    p {
+      font-size: 14px;
+      color: gray;
+      margin-top: 15px;
+    }
+  </style>
+</head>
 <body>
 
-<h2>Login / Signup</h2>
+  <div class="box">
+    <h2>Automify Login</h2>
 
-<input id="email" placeholder="Email">
-<input id="password" type="password" placeholder="Password">
+    <input placeholder="Email">
+    <input type="password" placeholder="Password">
 
-<button onclick="signup()">Signup</button>
-<button onclick="login()">Login</button>
+    <button>Login</button>
 
-<script type="module" src="assets/js/auth.js"></script>
+    <p>Authentication coming soon</p>
+  </div>
+
 </body>
 </html>
