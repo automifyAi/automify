@@ -1,100 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Dashboard – Automify</title>
-
-  <!-- SEO -->
-  <meta name="description" content="Automify dashboard to manage customer leads using a simple CRM.">
-
-  <!-- Mobile -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <style>
-    body{
-      margin:0;
-      font-family:Arial, sans-serif;
-      background:#f4f6f8;
-    }
-    .container{
-      min-height:100vh;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    }
-    .box{
-      background:#fff;
-      width:90%;
-      max-width:420px;
-      padding:25px;
-      border-radius:10px;
-      box-shadow:0 0 10px rgba(0,0,0,0.1);
-    }
-    input,button{
-      width:100%;
-      padding:12px;
-      margin-top:12px;
-    }
-    button{
-      background:#000;
-      color:#fff;
-      border:none;
-      border-radius:5px;
-    }
-    ul{
-      padding-left:18px;
-      margin-top:15px;
-    }
-    li{
-      margin-bottom:8px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Automify CRM</title>
+    <style>
+        :root { --primary: #2563eb; --bg: #f1f5f9; }
+        body { font-family: sans-serif; background: var(--bg); margin: 0; padding: 1rem; }
+        .nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+        .container { max-width: 600px; margin: 0 auto; }
+        .card { background: white; padding: 1.5rem; border-radius: 0.75rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 1.5rem; }
+        input { padding: 0.6rem; border: 1px solid #cbd5e1; border-radius: 0.25rem; margin-right: 0.5rem; margin-bottom: 0.5rem; width: 100%; box-sizing: border-box; }
+        button { background: var(--primary); color: white; border: none; padding: 0.6rem 1rem; border-radius: 0.25rem; cursor: pointer; width: 100%; }
+        .lead-item { border-bottom: 1px solid #f1f5f9; padding: 0.75rem 0; display: flex; justify-content: space-between; }
+        .lead-item:last-child { border: none; }
+        .lead-info b { display: block; }
+        .lead-info span { font-size: 0.85rem; color: #64748b; }
+        
+        @media (min-width: 480px) {
+            input { width: calc(40% - 0.5rem); }
+            button { width: auto; }
+        }
+    </style>
 </head>
 <body>
+    <div class="container">
+        <div class="nav">
+            <strong>Automify Dashboard</strong>
+            <a href="index.html" style="font-size: 0.8rem; color: #64748b;">Logout</a>
+        </div>
 
-<div class="container">
-  <div class="box">
-    <h2>Dashboard</h2>
+        <div class="card">
+            <h3>Add New Lead</h3>
+            <input type="text" id="custName" placeholder="Customer Name">
+            <input type="text" id="custPhone" placeholder="Phone Number">
+            <button onclick="addLead()">Add Lead</button>
+        </div>
 
-    <h3>Add Lead</h3>
-    <input id="name" placeholder="Customer Name">
-    <input id="phone" placeholder="Phone Number">
-    <button onclick="addLead()">Add Lead</button>
+        <div class="card">
+            <h3>Recent Leads</h3>
+            <div id="leadList"></div>
+        </div>
+    </div>
 
-    <h3>Leads</h3>
-    <ul id="leadList"></ul>
-  </div>
-</div>
+    <script>
+        let leads = JSON.parse(localStorage.getItem('leads')) || [];
 
-<script>
-  function loadLeads(){
-    const leads = JSON.parse(localStorage.getItem("leads")) || [];
-    const list = document.getElementById("leadList");
-    list.innerHTML = "";
-    leads.forEach(l => {
-      const li = document.createElement("li");
-      li.textContent = l.name + " – " + l.phone;
-      list.appendChild(li);
-    });
-  }
+        function renderLeads() {
+            const list = document.getElementById('leadList');
+            list.innerHTML = leads.length ? '' : '<p style="color:#94a3b8">No leads yet.</p>';
+            leads.forEach((lead, index) => {
+                list.innerHTML += `
+                    <div class="lead-item">
+                        <div class="lead-info">
+                            <b>${lead.name}</b>
+                            <span>${lead.phone}</span>
+                        </div>
+                        <button onclick="deleteLead(${index})" style="width:auto; padding: 0.2rem 0.5rem; background:#fee2e2; color:#ef4444;">Delete</button>
+                    </div>
+                `;
+            });
+        }
 
-  function addLead(){
-    const name = document.getElementById("name").value;
-    const phone = document.getElementById("phone").value;
-    if(!name || !phone) return;
+        function addLead() {
+            const name = document.getElementById('custName').value;
+            const phone = document.getElementById('custPhone').value;
+            
+            if(name && phone) {
+                leads.push({ name, phone });
+                localStorage.setItem('leads', JSON.stringify(leads));
+                document.getElementById('custName').value = '';
+                document.getElementById('custPhone').value = '';
+                renderLeads();
+            } else {
+                alert("Please fill in both fields");
+            }
+        }
 
-    const leads = JSON.parse(localStorage.getItem("leads")) || [];
-    leads.push({name, phone});
-    localStorage.setItem("leads", JSON.stringify(leads));
+        function deleteLead(index) {
+            leads.splice(index, 1);
+            localStorage.setItem('leads', JSON.stringify(leads));
+            renderLeads();
+        }
 
-    document.getElementById("name").value = "";
-    document.getElementById("phone").value = "";
-
-    loadLeads();
-  }
-
-  loadLeads();
-</script>
-
+        // Initial Load
+        renderLeads();
+    </script>
 </body>
 </html>
