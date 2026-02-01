@@ -1,68 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Login – Automify</title>
-
-  <!-- SEO -->
-  <meta name="description" content="Login to Automify to manage your business leads and tools.">
-
-  <!-- Mobile -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <style>
-    body{
-      margin:0;
-      font-family:Arial, sans-serif;
-      background:#f4f6f8;
-    }
-    .container{
-      min-height:100vh;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    }
-    .box{
-      background:#fff;
-      width:90%;
-      max-width:360px;
-      padding:25px;
-      border-radius:10px;
-      box-shadow:0 0 10px rgba(0,0,0,0.1);
-      text-align:center;
-    }
-    input,button{
-      width:100%;
-      padding:12px;
-      margin-top:12px;
-    }
-    button{
-      background:#000;
-      color:#fff;
-      border:none;
-      border-radius:5px;
-    }
-    p{
-      font-size:13px;
-      color:#666;
-      margin-top:15px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Automify</title>
+    <style>
+        :root { --primary: #2563eb; --bg: #f8fafc; }
+        body {
+            font-family: sans-serif;
+            background: var(--bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 350px;
+        }
+        h2 { margin-top: 0; text-align: center; }
+        input {
+            width: 100%;
+            padding: 0.75rem;
+            margin: 0.5rem 0 1rem 0;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.4rem;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 0.75rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 0.4rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
+    <div class="card">
+        <h2>Welcome Back</h2>
+        <form id="loginForm">
+            <label>Email</label>
+            <input type="email" placeholder="you@example.com" required>
+            <label>Password</label>
+            <input type="password" placeholder="••••••••" required>
+            <button type="submit">Login</button>
+        </form>
+    </div>
 
-<div class="container">
-  <div class="box">
-    <h2>Automify Login</h2>
-
-    <input type="email" placeholder="Email">
-    <input type="password" placeholder="Password">
-
-    <button onclick="location.href='dashboard.html'">Login</button>
-
-    <p>Demo login – no backend yet</p>
-  </div>
-</div>
-
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            // Demo logic: Just redirect
+            window.location.href = 'dashboard.html';
+        });
+    </script>
 </body>
 </html>
