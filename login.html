@@ -1,55 +1,68 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>Login – Automify</title>
+
+  <!-- SEO -->
+  <meta name="description" content="Login to Automify to manage your business leads and tools.">
+
+  <!-- Mobile -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <style>
-    body {
-      font-family: Arial;
-      background: #f4f6f8;
-      padding-top: 100px;
+    body{
+      margin:0;
+      font-family:Arial, sans-serif;
+      background:#f4f6f8;
     }
-    .box {
-      background: white;
-      width: 300px;
-      margin: auto;
-      padding: 25px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      text-align: center;
+    .container{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
     }
-    input {
-      width: 100%;
-      padding: 10px;
-      margin-top: 10px;
+    .box{
+      background:#fff;
+      width:90%;
+      max-width:360px;
+      padding:25px;
+      border-radius:10px;
+      box-shadow:0 0 10px rgba(0,0,0,0.1);
+      text-align:center;
     }
-    button {
-      width: 100%;
-      padding: 10px;
-      margin-top: 15px;
-      background: black;
-      color: white;
-      border: none;
-      border-radius: 5px;
+    input,button{
+      width:100%;
+      padding:12px;
+      margin-top:12px;
     }
-    p {
-      font-size: 14px;
-      color: gray;
-      margin-top: 15px;
+    button{
+      background:#000;
+      color:#fff;
+      border:none;
+      border-radius:5px;
+    }
+    p{
+      font-size:13px;
+      color:#666;
+      margin-top:15px;
     }
   </style>
 </head>
 <body>
 
+<div class="container">
   <div class="box">
     <h2>Automify Login</h2>
 
-    <input placeholder="Email">
+    <input type="email" placeholder="Email">
     <input type="password" placeholder="Password">
 
-    <button>Login</button>
+    <button onclick="location.href='dashboard.html'">Login</button>
 
-    <p>Authentication coming soon</p>
+    <p>Demo login – no backend yet</p>
   </div>
+</div>
 
 </body>
 </html>
