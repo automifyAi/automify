@@ -1,17 +1,58 @@
 <!DOCTYPE html>
 <html>
+<head>
+  <title>Automify Dashboard</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #f4f6f8;
+      padding: 40px;
+    }
+    .box {
+      background: white;
+      max-width: 400px;
+      margin: auto;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+    }
+    button {
+      width: 100%;
+      margin-top: 15px;
+      padding: 10px;
+      background: black;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+    .note {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 14px;
+      color: gray;
+    }
+  </style>
+</head>
 <body>
 
-<h2>Dashboard</h2>
+  <div class="box">
+    <h2>Dashboard</h2>
 
-<h3>Add Lead</h3>
-<input id="name" placeholder="Customer Name">
-<input id="phone" placeholder="Phone">
-<button onclick="addLead()">Add</button>
+    <input placeholder="Customer Name">
+    <input placeholder="Phone Number">
 
-<h3>My Leads</h3>
-<ul id="leadList"></ul>
+    <button>Add Lead</button>
 
-<script type="module" src="assets/js/crm.js"></script>
+    <p class="note">CRM tool – basic version</p>
+  </div>
+
 </body>
 </html>
