@@ -1,58 +1,100 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Automify Dashboard</title>
+  <meta charset="UTF-8">
+  <title>Dashboard – Automify</title>
+
+  <!-- SEO -->
+  <meta name="description" content="Automify dashboard to manage customer leads using a simple CRM.">
+
+  <!-- Mobile -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <style>
-    body {
-      font-family: Arial;
-      background: #f4f6f8;
-      padding: 40px;
+    body{
+      margin:0;
+      font-family:Arial, sans-serif;
+      background:#f4f6f8;
     }
-    .box {
-      background: white;
-      max-width: 400px;
-      margin: auto;
-      padding: 25px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    .container{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
     }
-    h2 {
-      text-align: center;
+    .box{
+      background:#fff;
+      width:90%;
+      max-width:420px;
+      padding:25px;
+      border-radius:10px;
+      box-shadow:0 0 10px rgba(0,0,0,0.1);
     }
-    input {
-      width: 100%;
-      padding: 10px;
-      margin-top: 10px;
+    input,button{
+      width:100%;
+      padding:12px;
+      margin-top:12px;
     }
-    button {
-      width: 100%;
-      margin-top: 15px;
-      padding: 10px;
-      background: black;
-      color: white;
-      border: none;
-      border-radius: 5px;
+    button{
+      background:#000;
+      color:#fff;
+      border:none;
+      border-radius:5px;
     }
-    .note {
-      text-align: center;
-      margin-top: 15px;
-      font-size: 14px;
-      color: gray;
+    ul{
+      padding-left:18px;
+      margin-top:15px;
+    }
+    li{
+      margin-bottom:8px;
     }
   </style>
 </head>
 <body>
 
+<div class="container">
   <div class="box">
     <h2>Dashboard</h2>
 
-    <input placeholder="Customer Name">
-    <input placeholder="Phone Number">
+    <h3>Add Lead</h3>
+    <input id="name" placeholder="Customer Name">
+    <input id="phone" placeholder="Phone Number">
+    <button onclick="addLead()">Add Lead</button>
 
-    <button>Add Lead</button>
-
-    <p class="note">CRM tool – basic version</p>
+    <h3>Leads</h3>
+    <ul id="leadList"></ul>
   </div>
+</div>
+
+<script>
+  function loadLeads(){
+    const leads = JSON.parse(localStorage.getItem("leads")) || [];
+    const list = document.getElementById("leadList");
+    list.innerHTML = "";
+    leads.forEach(l => {
+      const li = document.createElement("li");
+      li.textContent = l.name + " – " + l.phone;
+      list.appendChild(li);
+    });
+  }
+
+  function addLead(){
+    const name = document.getElementById("name").value;
+    const phone = document.getElementById("phone").value;
+    if(!name || !phone) return;
+
+    const leads = JSON.parse(localStorage.getItem("leads")) || [];
+    leads.push({name, phone});
+    localStorage.setItem("leads", JSON.stringify(leads));
+
+    document.getElementById("name").value = "";
+    document.getElementById("phone").value = "";
+
+    loadLeads();
+  }
+
+  loadLeads();
+</script>
 
 </body>
 </html>
